@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1>Lista de Usuários</h1>
+    <a href="{{ route('users.create') }}">Adicionar</a>
     <table>
         <thead>
             <tr>
@@ -16,14 +17,19 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $user)
+            @forelse ($users as $user)
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>-</td>
                 </tr>
-            @endforeach
+                @empty
+                <tr>
+                    <td colspan='100'>nenhum usuario no banco</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
+    {{ $users->links() }}
 </body>
 </html>
